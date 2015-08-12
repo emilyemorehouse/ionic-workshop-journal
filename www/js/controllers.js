@@ -3,10 +3,9 @@ angular.module('starter.controllers', [])
 .controller('DashCtrl', function($scope) {})
 
 .controller('JournalCtrl', function($scope, $ionicModal, Journal) {
-  $scope.journal = Journal.all();
+  $scope.journal = Journal.all();   // Grab all of our entries
 
   $scope.entry = {};  // Define entry before we use the modal so we can clear out our data
-
 
   $ionicModal.fromTemplateUrl('templates/modals/entry.html', {
     scope: $scope,
@@ -20,11 +19,20 @@ angular.module('starter.controllers', [])
   };
 
   $scope.closeEntryModal = function(entry) {
-    $scope.modal.hide();
 
-    if (angular.isDefined(entry.title) && angular.isDefined(entry.content))
+    // Make sure we have form data, then hide/save/clear form
+    if (angular.isDefined(entry.title) && angular.isDefined(entry.content)) {
+      $scope.modal.hide();
       Journal.add(entry);
+      $scope.entry = {};
+    }
+    // Don't allow an incomplete form!
+    else
+      alert("Please complete the form.");
+  };
 
+  $scope.cancelEntryModal = function() {
+    $scope.modal.hide();
     $scope.entry = {};
   };
 
