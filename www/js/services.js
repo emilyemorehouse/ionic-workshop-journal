@@ -1,6 +1,7 @@
 angular.module('starter.services', [])
 
 .factory('Journal', function() {
+  // Give us an example object
   var journal = [
     {
       "title": "My 1st Entry",
@@ -8,12 +9,21 @@ angular.module('starter.services', [])
     }
   ];
 
+  // If we have a journal object, use that!
+  if (localStorage.journal)
+    journal = JSON.parse(localStorage.journal);
+
+  var save = function() {
+    localStorage.journal = JSON.stringify(journal);
+  };
+
   return {
     all: function() {
       return journal;
     },
     remove: function(entry) {
       journal.splice(journal.indexOf(entry), 1);
+      save();
     },
     get: function(entryId) {
       for (var i = 0; i < journal.length; i++) {
@@ -25,6 +35,7 @@ angular.module('starter.services', [])
     },
     add: function(entry) {
       journal.push(entry);
+      save();
     }
   };
 })
