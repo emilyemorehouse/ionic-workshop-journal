@@ -2,8 +2,32 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope) {})
 
-.controller('JournalCtrl', function($scope, Journal) {
+.controller('JournalCtrl', function($scope, $ionicModal, Journal) {
   $scope.journal = Journal.all();
+
+  $scope.entry = {};  // Define entry before we use the modal so we can clear out our data
+
+
+  $ionicModal.fromTemplateUrl('templates/modals/entry.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+
+  $scope.showEntryModal = function() {
+    $scope.modal.show();
+  };
+
+  $scope.closeEntryModal = function(entry) {
+    $scope.modal.hide();
+
+    if (angular.isDefined(entry.title) && angular.isDefined(entry.content))
+      Journal.add(entry);
+
+    $scope.entry = {};
+  };
+
 })
 
 .controller('ChatsCtrl', function($scope, Chats) {
