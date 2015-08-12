@@ -22,6 +22,9 @@ angular.module('starter.services', [])
         }
       }
       return null;
+    },
+    add: function(entry) {
+      journal.push(entry);
     }
   };
 })
