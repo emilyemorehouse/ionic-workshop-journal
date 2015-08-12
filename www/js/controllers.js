@@ -44,6 +44,10 @@ angular.module('starter.controllers', [])
     $scope.entry = {};
   };
 
+  $scope.remove = function(entry) {
+    Journal.remove(entry);
+  };
+
 })
 
 .controller('ChatsCtrl', function($scope, Chats) {
