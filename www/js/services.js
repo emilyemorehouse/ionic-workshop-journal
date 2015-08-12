@@ -1,5 +1,31 @@
 angular.module('starter.services', [])
 
+.factory('Journal', function() {
+  var journal = [
+    {
+      "title": "My 1st Entry",
+      "content": "This is a sample entry."
+    }
+  ];
+
+  return {
+    all: function() {
+      return journal;
+    },
+    remove: function(entry) {
+      journal.splice(journal.indexOf(entry), 1);
+    },
+    get: function(entryId) {
+      for (var i = 0; i < journal.length; i++) {
+        if (journal[i].id === parseInt(entryId)) {
+          return journal[i];
+        }
+      }
+      return null;
+    }
+  };
+})
+
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array
 
