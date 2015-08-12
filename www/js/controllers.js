@@ -2,7 +2,7 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope) {})
 
-.controller('JournalCtrl', function($scope, $ionicModal, Journal) {
+.controller('JournalCtrl', function($scope, $ionicModal, $ionicPopup, Journal) {
   $scope.journal = Journal.all();   // Grab all of our entries
 
   $scope.entry = {};  // Define entry before we use the modal so we can clear out our data
@@ -27,8 +27,16 @@ angular.module('starter.controllers', [])
       $scope.entry = {};
     }
     // Don't allow an incomplete form!
-    else
-      alert("Please complete the form.");
+    else {
+      var alertPopup = $ionicPopup.alert({
+        title: 'STOP RIGHT THERE!',
+        template: 'Please fill out all fields.',
+        buttons: [{ // Array[Object] (optional). Buttons to place in the popup footer.
+          text: 'Say you\'re sorry.',
+          type: 'button-royal'
+        }]
+      });
+    }
   };
 
   $scope.cancelEntryModal = function() {
