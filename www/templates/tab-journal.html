@@ -1,5 +1,13 @@
 <ion-view view-title="Journal">
   <ion-content class="padding">
-	<h4>This is where your journal will go.</h4>
+
+	<ion-list>
+		<ion-item class="item-remove-animate item-icon-right" ng-repeat="entry in journal" type="item-text-wrap">
+        	<h2>{{entry.title}}</h2>
+        	<p>{{entry.content}}</p>
+        	<i class="icon ion-chevron-right icon-accessory"></i>
+      	</ion-item>
+	</ion-list>
+
   </ion-content>
 </ion-view>

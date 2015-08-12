@@ -2,8 +2,8 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope) {})
 
-.controller('JournalCtrl', function($scope) {
-  
+.controller('JournalCtrl', function($scope, Journal) {
+  $scope.journal = Journal.all();
 })
 
 .controller('ChatsCtrl', function($scope, Chats) {
